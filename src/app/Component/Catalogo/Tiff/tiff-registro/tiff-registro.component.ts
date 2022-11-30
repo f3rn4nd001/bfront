@@ -69,6 +69,7 @@ export class TiffRegistroComponent implements OnInit {
     });
 
     this.NuevoTiffformGroup = new FormGroup({
+      'ecodTif':new FormControl('',[]),
       'tTiff': new FormControl('', [Validators.required]),
       'tNombre': new FormControl('', [Validators.required]),
       'ecodEntidades': new FormControl('', [Validators.required]),
@@ -105,13 +106,21 @@ export class TiffRegistroComponent implements OnInit {
     })
   }
   getEditarRegistro(){
-
-
-
-    localStorage.removeItem('ecodTiff');
-
-
+    this._service.getDetalle(this.ecodTiff).then((response:any)=>{
+     
+      this.datosTiff=(response.sql[0]);   
+      this.datos.ecodTif = this.datosTiff.ecodTif; 
+      this.datos.tTiff = this.datosTiff.tTif;
+      this.datos.tNombre = this.datosTiff.tNombre;
+      this.datos.tNpmbreCorto = this.datosTiff.tNombreCorto;
+      this.datos.tRFC = this.datosTiff.tRFC;
+      this.datos.tCP = this.datosTiff.tcp;
+      this.datos.ecodMunicipios = ({nombres:this.datosTiff['Ciudad'], ecodmunicipios:this.datosTiff['ecodCiudad']});
+      this.datos.ecodEntidades = ({nombres:this.datosTiff['Estado'], ecodestados:this.datosTiff['ecodEstado']});
+      this.datos.ecodEstatus = this.datosTiff.ecodEstatus
+      localStorage.removeItem('ecodTiff');
     
+    })
   }
 
   getcomprenento(){

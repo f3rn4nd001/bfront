@@ -59,5 +59,20 @@ export class TiffService {
             });
           });
         }
-        
+
+        getDetalle(Params:any){
+          let json=JSON.stringify(Params);
+          var api = `${environment.direcurl}Catalogo/tiff/detalles`;	   	
+          return new Promise( ( resolve, reject ) => { 
+            axios.post(api,{datos:JSON.parse(json),haders:"^SL#Hcj[d8kTjwOr4~p4aK7+8x0OlF9GLCvH2c-]~bxLMos"}).then(response => {
+              resolve(response.data);        
+            }).catch((error) => {
+              if(error.response.status==500){
+                let dialogRef = this.dialog.open(ErrorComponent, {
+                  data: { titulo: "Error al conectar con el servidor ", sup: "Revise su coneccion de internet" } 
+                });
+              }
+            });
+          });
+        }  
 }

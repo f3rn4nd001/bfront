@@ -97,7 +97,6 @@ export class TiffConsultaComponent implements OnInit {
       data.tipousuario = this.tipousuario;
       data.filtro=this.reactiveForm.value;
       this._service.getRegistros(data).then((response:any)=>{
-        console.log(response);
         this.dataSource = new MatTableDataSource(response);
         this.dataSource.paginator = this.paginator;
      

@@ -200,7 +200,6 @@ export class NuevoViajeComponent implements OnInit {
       this.datos.ecodOperados = ({nombres:this.datosViajes['operador'], ecodUsuarios:this.datosViajes['ecodOperados']});
       this.datos.ecodtifforigen = ({tTif:this.datosViajes['tTif'], ecodTif:this.datosViajes['tOrigen']});
       this.datos.ecodtiffDestino = ({tTif:this.datosViajes['tiffdestino'], ecodTif:this.datosViajes['tDestino']});
-
       this.datos.ecodProvedor =  this.datosViajes.ecodProvedor;
       this.datos.fhLlegada = this.datosViajes.fhLlegada;
       this.datos.fhSalida = this.datosViajes.fhSalida;
