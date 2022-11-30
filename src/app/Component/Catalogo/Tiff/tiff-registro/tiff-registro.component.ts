@@ -105,7 +105,13 @@ export class TiffRegistroComponent implements OnInit {
     })
   }
   getEditarRegistro(){
+
+
+
     localStorage.removeItem('ecodTiff');
+
+
+    
   }
 
   getcomprenento(){
