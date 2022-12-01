@@ -30,9 +30,8 @@
       <div class="mb-4 col-md-2"></div>
         <div class="mb-4 col-md-2">
           <label for="tRFC" style="text-align: center;">RFC</label>
-          <input (blur)="validadrfc(reactiveForm.value.tRFC)" (keyup)="mayusculaRFC(reactiveForm.value.tRFC)" [(ngModel)]="datos.tRFC" formControlName="tRFC" class="form-control" id="tRFC" placeholder="RFC*" maxlength="13" required>
+          <input (blur)="validadrfc(reactiveForm.value.tRFC)" (keyup)="mayusculaRFC(reactiveForm.value.tRFC)" [(ngModel)]="datos.tRFC" formControlName="tRFC" class="form-control" id="tRFC" placeholder="RFC*" maxlength="13" >
           <div align="end">{{reactiveForm.value.tRFC ? reactiveForm.value.tRFC.length : 0}} / 13</div>
-          <div class="invalid-feedback">Este campo es necesario</div>
         </div>
         <div class="mb-4 col-md-3">
           <label for="tNombre" style="text-align: center;">Nombre</label>
@@ -132,9 +131,7 @@
           <div class="mb-4 col-md-2"></div>
           <div class="mb-4 col-md-2">
             <label for="tRFC" style="text-align: center;">RFC</label>
-            <input (blur)="validadrfc(reactiveForm.value.tRFC)" (keyup)="mayusculaRFC(reactiveForm.value.tRFC)" [(ngModel)]="datos.tRFC" formControlName="tRFC" class="form-control" id="tRFC" placeholder="RFC*" maxlength="13" required>
-            <div align="end">{{reactiveForm.value.tRFC ? reactiveForm.value.tRFC.length : 0}} / 13</div>
-            <div class="invalid-feedback">Este campo es necesario</div>
+            <input (blur)="validadrfc(reactiveForm.value.tRFC)" (keyup)="mayusculaRFC(reactiveForm.value.tRFC)" [(ngModel)]="datos.tRFC" formControlName="tRFC" class="form-control" id="tRFC" placeholder="RFC*" maxlength="13" >
           </div>
           <div class="mb-4 col-md-3">
             <label for="tNombre" style="text-align: center;">Nombre</label>

@@ -121,7 +121,7 @@ export class UsusarioRegistroComponent implements OnInit {
     let errorsviaje:any = [];
     let bandera = 1;
     let cadena:any = this.reactiveForm.value.tRFC;
-    if (cadena.length == 12){
+    /*if (cadena.length == 12){
       var valid = '^(([A-Z]|[a-z]){3})([0-9]{6})((([A-Z]|[a-z]|[0-9]){3}))';
     }
     else{
@@ -132,7 +132,7 @@ export class UsusarioRegistroComponent implements OnInit {
     if (matchArray==null) {
       errorsviaje.push("El RFC no es valido");
       bandera = 0;
-    }
+    }*/
     if (!this.reactiveForm.value.tNombre) {
       errorsviaje.push("El campo 'nombre' es requerido");
       bandera = 0;
@@ -143,7 +143,7 @@ export class UsusarioRegistroComponent implements OnInit {
       });
     }
     if (!this.ecodUsuarios || this.ecodUsuarios == 'null') {
-      this._service.getRFC(cadena).then((response:any)=>{
+    /*  this._service.getRFC(cadena).then((response:any)=>{
         let rfcap= response.sql;
         if (rfcap.dl != 0) {
           bandera = 0;
@@ -151,8 +151,8 @@ export class UsusarioRegistroComponent implements OnInit {
           let dialogRef = this.dialog.open(ErrorComponent, {
             data: { titulo: "Revise los campos marcados en rojo", listado: errorsviaje } 
           });
-        } 
-        else{ 
+        }*/ 
+        //else{ 
           if (bandera == 1) {
             let dialogRef = this.dialog.open(GuardarComponent, {
               data: {titulo: "Guardar", subtitulo: "¿Deseas guardar la información?", cancelar: '1'} 
@@ -185,8 +185,8 @@ export class UsusarioRegistroComponent implements OnInit {
               }
             });
           }
-        }
-      })
+       // }
+     // })
     }
     else{ 
       if (bandera == 1) {
