@@ -77,7 +77,8 @@ export class TiffRegistroComponent implements OnInit {
       'tNpmbreCorto':new FormControl('',),
       'tRFC':new FormControl('',),
       'tCP':new FormControl('',),
-      'ecodEstatus':new FormControl('',[Validators.required] ),
+      'ecodEstatus':new FormControl('',[Validators.required]),
+      'tDireccion':new FormControl('',[])
     });
   }
 
@@ -114,6 +115,7 @@ export class TiffRegistroComponent implements OnInit {
       this.datos.tNpmbreCorto = this.datosTiff.tNombreCorto;
       this.datos.tRFC = this.datosTiff.tRFC;
       this.datos.tCP = this.datosTiff.tcp;
+      this.datos.tDireccion=this.datosTiff.tDireccion;
       this.datos.ecodMunicipios = ({nombres:this.datosTiff['Ciudad'], ecodmunicipios:this.datosTiff['ecodCiudad']});
       this.datos.ecodEntidades = ({nombres:this.datosTiff['Estado'], ecodestados:this.datosTiff['ecodEstado']});
       this.datos.ecodEstatus = this.datosTiff.ecodEstatus
@@ -153,6 +155,7 @@ export class TiffRegistroComponent implements OnInit {
     this.NuevoTiffformGroup.value.ecodEntidades= this.ecodEntidades.value;
     this.NuevoTiffformGroup.value.ecodMunicipios= this.ecodMunicipios.value;
     this.NuevoTiffformGroup.value.ecodTiffv= this.ecodTiff; 
+
    if (!this.NuevoTiffformGroup.value.ecodEstatus) {
     errorsviaje.push("El estatus es requerido");
     bandera = 0;
@@ -166,10 +169,11 @@ export class TiffRegistroComponent implements OnInit {
       errorsviaje.push("La entidad es requerido");
       bandera = 0;
     }  
-    if (this.NuevoTiffformGroup.value.ecodEntidades) {     
+    if (this.NuevoTiffformGroup.value.ecodEntidades) {
         if (!this.NuevoTiffformGroup.value.ecodEntidades.ecodestados) {
           errorsviaje.push("Seleccione un estado");
           bandera = 0;
+         
       }
     }
 
