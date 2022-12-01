@@ -153,7 +153,6 @@ export class TiffRegistroComponent implements OnInit {
     this.NuevoTiffformGroup.value.ecodEntidades= this.ecodEntidades.value;
     this.NuevoTiffformGroup.value.ecodMunicipios= this.ecodMunicipios.value;
     this.NuevoTiffformGroup.value.ecodTiffv= this.ecodTiff; 
-    this.NuevoTiffformGroup.value.ecodEntidades.updateValueAndValidity()
    if (!this.NuevoTiffformGroup.value.ecodEstatus) {
     errorsviaje.push("El estatus es requerido");
     bandera = 0;
