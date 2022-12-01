@@ -77,8 +77,7 @@ export class TiffRegistroComponent implements OnInit {
       'tNpmbreCorto':new FormControl('',),
       'tRFC':new FormControl('',),
       'tCP':new FormControl('',),
-      'ecodEstatus':new FormControl('',),
-      
+      'ecodEstatus':new FormControl('',[Validators.required] ),
     });
   }
 
@@ -153,33 +152,35 @@ export class TiffRegistroComponent implements OnInit {
     let errorsviaje = [];
     this.NuevoTiffformGroup.value.ecodEntidades= this.ecodEntidades.value;
     this.NuevoTiffformGroup.value.ecodMunicipios= this.ecodMunicipios.value;
-    this.NuevoTiffformGroup.value.ecodTiffv= this.ecodTiff;  
-   
+    this.NuevoTiffformGroup.value.ecodTiffv= this.ecodTiff; 
+    this.NuevoTiffformGroup.value.ecodEntidades.updateValueAndValidity()
+   if (!this.NuevoTiffformGroup.value.ecodEstatus) {
+    errorsviaje.push("El estatus es requerido");
+    bandera = 0;
+   }
     if (!this.NuevoTiffformGroup.value.tNombre) {
-      errorsviaje.push("El Nombre es requerido");
+      errorsviaje.push("El nombre es requerido");
       bandera = 0;
     }
       
-   
-    
     if (!this.NuevoTiffformGroup.value.ecodEntidades) {
-      errorsviaje.push("El Entidad es requerido");
+      errorsviaje.push("La entidad es requerido");
       bandera = 0;
     }  
     if (this.NuevoTiffformGroup.value.ecodEntidades) {     
         if (!this.NuevoTiffformGroup.value.ecodEntidades.ecodestados) {
-          errorsviaje.push("Seleccionar una Estado");
+          errorsviaje.push("Seleccione un estado");
           bandera = 0;
       }
     }
 
     if (!this.NuevoTiffformGroup.value.ecodMunicipios) {
-      errorsviaje.push("El Municipio es requerido");
+      errorsviaje.push("El municipio es requerido");
       bandera = 0;
     }  
     if (this.NuevoTiffformGroup.value.ecodMunicipios) {     
         if (!this.NuevoTiffformGroup.value.ecodMunicipios.ecodmunicipios) {
-          errorsviaje.push("Seleccionar una Municipiotado");
+          errorsviaje.push("Seleccione un municipio");
           bandera = 0;
       }
     }

@@ -2,12 +2,12 @@
     <div class="destock">
         <nav class="navbar navbar-expand-lg " style="background: #0146af; " *ngIf="ecodTiff ===  null ">
             <div class="container-fluid" style="align-items: center;">
-              <a class="navbar-brand" style="padding-left:40%;color: #fff;"  ><h2 style="padding-left:50%;color: #fff;">Nuevo tiff</h2></a>
+              <a class="navbar-brand" style="padding-left:40%;color: #fff;"  ><h2 style="padding-left:50%;color: #fff;">Nuevo tif</h2></a>
             </div> 
           </nav>
           <nav class="navbar navbar-expand-lg " style="background: #0146af; " *ngIf="ecodTiff !=  null ">
             <div class="container-fluid" style="align-items: center;">
-              <a class="navbar-brand" style="padding-left:40%;color: #fff;"  ><h2 style="padding-left:50%;color: #fff;">Editar tiff</h2></a>
+              <a class="navbar-brand" style="padding-left:40%;color: #fff;"  ><h2 style="padding-left:50%;color: #fff;">Editar tif</h2></a>
             </div> 
           </nav>
           <div class="row">
@@ -39,8 +39,8 @@
                 </mat-select>
               </mat-form-field>
               <div class="mb-4 col-md-3">
-                <label class="col-12" for="tTiffControll" >TIFF</label>
-                <input class="col-12" style="border-radius:7px ;min-height: 40px;"  id="tTiffControll" placeholder="TIFF" [(ngModel)]="datos.tTiff" formControlName="tTiff">
+                <label class="col-12" for="tTiffControll" >TIF</label>
+                <input class="col-12" style="border-radius:7px ;min-height: 40px;"  id="tTiffControll" placeholder="TIF" [(ngModel)]="datos.tTiff" formControlName="tTiff">
               </div>  
               <div class="mb-4 col-md-3">
                 <label for="tNombreControll" style="text-align: center;">Nombre</label>
@@ -85,12 +85,12 @@
     <div class="movil">
       <nav class="navbar navbar-expand-lg" style="background: #0146af;" *ngIf="ecodTiff ===  null ">
         <div class="container-fluid" style="align-items: center;">
-          <a class="navbar-brand" style="padding-left:40%; color: #fff;" ><h3>Nuevo tiff</h3></a>
+          <a class="navbar-brand" style="padding-left:40%; color: #fff;" ><h3>Nuevo tif</h3></a>
         </div> 
       </nav>
       <nav class="navbar navbar-expand-lg" style="background: #0146af;" *ngIf="ecodTiff !=  null ">
         <div class="container-fluid" style="align-items: center;">
-          <a class="navbar-brand" style="padding-left:40%; color: #fff;" ><h3>Editar tiff</h3></a>
+          <a class="navbar-brand" style="padding-left:40%; color: #fff;" ><h3>Editar tif</h3></a>
         </div> 
       </nav>
       <div class="row ">
@@ -103,7 +103,7 @@
           </div>
         </div> 
           <form class="was-validated container container" [formGroup]="ContraformGroup" style="padding-top: 10px; padding-left: 7%; padding-right: 9%;">
-          <label >Contraseña</label>
+          <label>Contraseña</label>
           <input type="password" style="min-height:45px;" (keyup)="validadContrasena(ContraformGroup.value.Contrasena)" [(ngModel)]="datos.Contrasena" formControlName="Contrasena" class="form-control" id="Contrasena" placeholder="Contrasena*"  required>
         </form>
       </div>
@@ -118,8 +118,8 @@
             </mat-select>
           </mat-form-field>
           <div class="mb-4 col-md-3">
-            <label class="col-12" for="tTiffControll" >TIFF</label>
-            <input class="col-12" style="border-radius:7px ;min-height: 40px;"  id="tTiffControll" placeholder="TIFF*" [(ngModel)]="datos.tTiff" formControlName="tTiff">
+            <label class="col-12" for="tTiffControll" >TIF</label>
+            <input class="col-12" style="border-radius:7px ;min-height: 40px;"  id="tTiffControll" placeholder="TIF" [(ngModel)]="datos.tTiff" formControlName="tTiff">
           </div> 
       
           <div class="mb-4 col-md-3">
