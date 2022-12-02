@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.7
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 01-12-2022 a las 18:23:19
--- Versión del servidor: 8.0.31
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 02-12-2022 a las 01:34:12
+-- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 7.4.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,21 +18,21 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `bslfullc_bsl`
+-- Base de datos: `datap`
 --
 
 DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE DEFINER=`bslfullc`@`localhost` PROCEDURE `stpEliminatUsuario` (`ecodUsuariosv` VARCHAR(250), `loginEcodUsuarios` VARCHAR(250), `tMotivo` VARCHAR(250))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `stpEliminatUsuario` (`ecodUsuariosv` VARCHAR(250), `loginEcodUsuarios` VARCHAR(250), `tMotivo` VARCHAR(250))   BEGIN
 UPDATE catusuarios set EcodEstatus = 5, ecodEliminacion = loginEcodUsuarios, fhEliminacion = NOW(),tMotivoEliminacion = tMotivo  where ecodUsuarios = ecodUsuariosv;
 
 SELECT ecodUsuarios AS Codigo from catusuarios where ecodUsuarios = ecodUsuariosv;
 
 end$$
 
-CREATE DEFINER=`bslfullc`@`localhost` PROCEDURE `stpInsertarBitCelular` (`telefono` VARCHAR(250))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `stpInsertarBitCelular` (`telefono` VARCHAR(250))   BEGIN
 declare existe int;
 set existe = (select count(*) from bitcelular where tcelular = telefono);
 if existe = 0
@@ -51,7 +50,7 @@ SELECT ecodCelular AS Codigo from bitcelular where tcelular = telefono;
 END if;
 end$$
 
-CREATE DEFINER=`bslfullc`@`localhost` PROCEDURE `stpInsertarBitCorreo` (`tCorreov` VARCHAR(150), `Codigomail` INT(16))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `stpInsertarBitCorreo` (`tCorreov` VARCHAR(150), `Codigomail` INT(16))   BEGIN
 declare existe int;
 set existe = (select count(*) from bitcorreos where  tcorreo = tCorreov );
 if existe = 0
@@ -67,7 +66,7 @@ UPDATE bitcorreos set tcorreo = tCorreov where ecodCorreo = Codigomail;
 END if;
 end$$
 
-CREATE DEFINER=`bslfullc`@`localhost` PROCEDURE `stpInsertarBitMenjes` (`tMensaje` VARCHAR(250))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `stpInsertarBitMenjes` (`tMensaje` VARCHAR(250))   BEGIN
 
 
 insert into bitmensaje(`tMensaje`,`fhSalida`)
@@ -78,7 +77,7 @@ values (tMensaje,NOW());
 SELECT  LAST_INSERT_ID() AS Codigo;
 end$$
 
-CREATE DEFINER=`bslfullc`@`localhost` PROCEDURE `stpInsertarBitViajes` (IN `treferenciav` VARCHAR(250), IN `tpedidov` VARCHAR(250), IN `ecodProvedorv` VARCHAR(250), IN `tOrigenv` VARCHAR(250), IN `tDestinov` VARCHAR(250), IN `fhSalidav` VARCHAR(250), IN `fhLlegadav` VARCHAR(250), IN `ecodOperadosv` VARCHAR(250), IN `ecodClientev` VARCHAR(250), IN `EcodEstatusv` INT(16), IN `tmonitoreov` INT(16), IN `ecodViajev` INT(16), IN `tTipoViajev` VARCHAR(50), IN `tTipoGastov` VARCHAR(50), IN `Linkv` VARCHAR(250))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `stpInsertarBitViajes` (IN `treferenciav` VARCHAR(250), IN `tpedidov` VARCHAR(250), IN `ecodProvedorv` VARCHAR(250), IN `tOrigenv` VARCHAR(250), IN `tDestinov` VARCHAR(250), IN `fhSalidav` VARCHAR(250), IN `fhLlegadav` VARCHAR(250), IN `ecodOperadosv` VARCHAR(250), IN `ecodClientev` VARCHAR(250), IN `EcodEstatusv` INT(16), IN `tmonitoreov` INT(16), IN `ecodViajev` INT(16), IN `tTipoViajev` VARCHAR(50), IN `tTipoGastov` VARCHAR(50), IN `Linkv` VARCHAR(250))   BEGIN
 
 declare existe int;
 set existe = (select count(*) from bitviajes where ecodViaje = ecodViajev);
@@ -97,7 +96,7 @@ UPDATE bitviajes set tTipoViaje=tTipoViajev,tTipoGasto=tTipoGastov, ecodProvedor
 END if;
 end$$
 
-CREATE DEFINER=`bslfullc`@`localhost` PROCEDURE `stpInsertarCatTiff` (`tTiffv` VARCHAR(30), `tNombrev` VARCHAR(100), `tNombreCortov` VARCHAR(50), `tRFCv` VARCHAR(30), `ecodEstadov` INT(50), `ecodCiudadv` INT(50), `loginEcodUsuarios` VARCHAR(50), `ecodTiffv` INT(50), `ecodEstatusv` INT(16), `tCPv` VARCHAR(30), `tDireccionv` VARCHAR(200))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `stpInsertarCatTiff` (`tTiffv` VARCHAR(30), `tNombrev` VARCHAR(100), `tNombreCortov` VARCHAR(50), `tRFCv` VARCHAR(30), `ecodEstadov` INT(50), `ecodCiudadv` INT(50), `loginEcodUsuarios` VARCHAR(50), `ecodTiffv` INT(50), `ecodEstatusv` INT(16), `tCPv` VARCHAR(30), `tDireccionv` VARCHAR(200))   BEGIN
 DECLARE existe int;
 SET existe = (SELECT count(*) FROM cattiff WHERE ecodTif = ecodTiffv);
 
@@ -124,7 +123,7 @@ IF;
 
 END$$
 
-CREATE DEFINER=`bslfullc`@`localhost` PROCEDURE `stpInsertarRelusUarioCelular` (`ecodCliente` VARCHAR(250), `codigoCel` INT(16))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `stpInsertarRelusUarioCelular` (`ecodCliente` VARCHAR(250), `codigoCel` INT(16))   BEGIN
 
 declare existe int;
 set existe = (select count(*) from relusuariocelular WHERE ecodUsuario = ecodCliente AND ecodCelular = codigoCel);
@@ -142,7 +141,7 @@ SELECT ecodUsuarioCelular AS Codigo from relusuariocelular WHERE ecodUsuario = e
 END if;
 end$$
 
-CREATE DEFINER=`bslfullc`@`localhost` PROCEDURE `stpInsertarRelusUarioCorreo` (`ecodCliente` VARCHAR(250), `codigoCoreeo` INT(16))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `stpInsertarRelusUarioCorreo` (`ecodCliente` VARCHAR(250), `codigoCoreeo` INT(16))   BEGIN
 
 declare existe int;
 set existe = (select count(*) from relusuariocorreo WHERE ecodUsuario = ecodCliente AND ecodCorreo = codigoCoreeo);
@@ -160,14 +159,14 @@ SELECT ecodUsuarioCorreo  AS Codigo from relusuariocorreo WHERE ecodUsuario = ec
 END if;
 end$$
 
-CREATE DEFINER=`bslfullc`@`localhost` PROCEDURE `stpInsertarRelViajeMensaje` (`ecodMensaje` INT(250), `ecodViaje` INT(16))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `stpInsertarRelViajeMensaje` (`ecodMensaje` INT(250), `ecodViaje` INT(16))   BEGIN
 insert into relviajemensaje(`ecodMensaje`,`ecodViaje`)
 values (ecodMensaje,ecodViaje);
 
 SELECT  LAST_INSERT_ID() AS Codigo;
 end$$
 
-CREATE DEFINER=`bslfullc`@`localhost` PROCEDURE `stpInsertarUsuario` (`tRFCv` VARCHAR(50), `tNombrev` VARCHAR(80), `tApellidov` VARCHAR(50), `EcodEstatusv` INT(16), `ecodUsuariosv` VARCHAR(250), `loginEcodUsuarios` VARCHAR(250))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `stpInsertarUsuario` (`tRFCv` VARCHAR(50), `tNombrev` VARCHAR(80), `tApellidov` VARCHAR(50), `EcodEstatusv` INT(16), `ecodUsuariosv` VARCHAR(250), `loginEcodUsuarios` VARCHAR(250))   BEGIN
 
 declare existe int;
 set existe = (select count(*) from catusuarios where ecodUsuarios = ecodUsuariosv);
@@ -188,7 +187,7 @@ UPDATE catusuarios set tRFC=tRFCv,tNombre = tNombrev, tApellido=tApellidov,ecoEd
 END if;
 end$$
 
-CREATE DEFINER=`bslfullc`@`localhost` PROCEDURE `stpInsertarviajesincidentes` (IN `reltreferencia` VARCHAR(250), IN `reltpedido` VARCHAR(250), IN `reltOrigen` VARCHAR(250), IN `reltDestino` VARCHAR(250), IN `relfhSalida` VARCHAR(250), IN `relfhLlegada` VARCHAR(250), IN `relecodOperados` VARCHAR(250), IN `relecodCliente` VARCHAR(250), IN `relecodProvedor` VARCHAR(250), IN `relecodEstatus` INT(16), IN `checkmonitor` INT(16), IN `relecodViaje` INT(16), IN `loginEcodUsuarios` VARCHAR(250), IN `tincidentes` VARCHAR(250), IN `reltTipoViaje` VARCHAR(50), IN `reltTipoGasto` VARCHAR(50), IN `relLink` VARCHAR(250))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `stpInsertarviajesincidentes` (IN `reltreferencia` VARCHAR(250), IN `reltpedido` VARCHAR(250), IN `reltOrigen` VARCHAR(250), IN `reltDestino` VARCHAR(250), IN `relfhSalida` VARCHAR(250), IN `relfhLlegada` VARCHAR(250), IN `relecodOperados` VARCHAR(250), IN `relecodCliente` VARCHAR(250), IN `relecodProvedor` VARCHAR(250), IN `relecodEstatus` INT(16), IN `checkmonitor` INT(16), IN `relecodViaje` INT(16), IN `loginEcodUsuarios` VARCHAR(250), IN `tincidentes` VARCHAR(250), IN `reltTipoViaje` VARCHAR(50), IN `reltTipoGasto` VARCHAR(50), IN `relLink` VARCHAR(250))   BEGIN
 	INSERT INTO bitinciadencias (
 		`treferencia`,
 		`ecodViaje`,
@@ -237,7 +236,7 @@ SELECT
 
 END$$
 
-CREATE DEFINER=`bslfullc`@`localhost` PROCEDURE `stpmodifBitViajesmonitos` (`tmonitoreov` INT(16), `ecodViajev` INT(16))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `stpmodifBitViajesmonitos` (`tmonitoreov` INT(16), `ecodViajev` INT(16))   BEGIN
 
 declare existe int;
 set existe = (select count(*) from bitviajes where ecodViaje = ecodViajev);
@@ -263,9 +262,9 @@ DELIMITER ;
 --
 
 CREATE TABLE `bitcelular` (
-  `ecodCelular` int NOT NULL,
+  `ecodCelular` int(11) NOT NULL,
   `tcelular` varchar(16) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `bitcelular`
@@ -281,11 +280,11 @@ INSERT INTO `bitcelular` (`ecodCelular`, `tcelular`) VALUES
 --
 
 CREATE TABLE `bitcorreos` (
-  `ecodCorreo` int NOT NULL,
+  `ecodCorreo` int(16) NOT NULL,
   `tcorreo` varchar(150) NOT NULL,
   `tpassword` varchar(250) DEFAULT NULL,
   `token` varchar(250) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `bitcorreos`
@@ -305,7 +304,7 @@ INSERT INTO `bitcorreos` (`ecodCorreo`, `tcorreo`, `tpassword`, `token`) VALUES
 --
 
 CREATE TABLE `bitinciadencias` (
-  `ecodIncidencia` int NOT NULL,
+  `ecodIncidencia` int(16) NOT NULL,
   `ecodViaje` varchar(250) DEFAULT NULL,
   `treferencia` varchar(250) DEFAULT NULL,
   `tpedido` varchar(250) DEFAULT NULL,
@@ -313,10 +312,10 @@ CREATE TABLE `bitinciadencias` (
   `tOrigen` varchar(250) DEFAULT NULL,
   `ecodOperados` varchar(250) DEFAULT NULL,
   `ecodCliente` varchar(250) DEFAULT NULL,
-  `EcodEstatus` int DEFAULT NULL,
+  `EcodEstatus` int(16) DEFAULT NULL,
   `fhSalida` date DEFAULT NULL,
   `fhLlegada` date DEFAULT NULL,
-  `tmonitoreo` int DEFAULT NULL,
+  `tmonitoreo` int(12) DEFAULT NULL,
   `tIncidentes` varchar(250) DEFAULT NULL,
   `ecodEdicion` varchar(250) DEFAULT NULL,
   `fhEdicion` datetime DEFAULT NULL,
@@ -324,7 +323,7 @@ CREATE TABLE `bitinciadencias` (
   `tTipoViaje` varchar(50) DEFAULT NULL,
   `tTipoGasto` varchar(50) DEFAULT NULL,
   `Link` varchar(250) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `bitinciadencias`
@@ -362,10 +361,10 @@ INSERT INTO `bitinciadencias` (`ecodIncidencia`, `ecodViaje`, `treferencia`, `tp
 --
 
 CREATE TABLE `bitmensaje` (
-  `ecodMensaje` int NOT NULL,
+  `ecodMensaje` int(16) NOT NULL,
   `tMensaje` varchar(250) DEFAULT NULL,
   `fhSalida` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `bitmensaje`
@@ -421,24 +420,31 @@ INSERT INTO `bitmensaje` (`ecodMensaje`, `tMensaje`, `fhSalida`) VALUES
 --
 
 CREATE TABLE `bitviajes` (
-  `ecodViaje` int NOT NULL,
+  `ecodViaje` int(16) NOT NULL,
   `treferencia` varchar(250) NOT NULL,
   `tpedido` varchar(250) NOT NULL,
   `tDestino` varchar(250) NOT NULL,
   `tOrigen` varchar(250) NOT NULL,
   `ecodOperados` varchar(250) NOT NULL,
   `ecodCliente` varchar(250) NOT NULL,
-  `EcodEstatus` int NOT NULL,
+  `EcodEstatus` int(16) NOT NULL,
   `fhSalida` date DEFAULT NULL,
   `fhLlegada` date DEFAULT NULL,
-  `tmonitoreo` int DEFAULT NULL,
+  `tmonitoreo` int(12) DEFAULT NULL,
   `EcodCreacion` varchar(250) NOT NULL,
   `fhCreacion` date DEFAULT NULL,
   `ecodProvedor` varchar(250) DEFAULT NULL,
   `tTipoViaje` varchar(50) DEFAULT NULL,
   `tTipoGasto` varchar(50) DEFAULT '',
   `Link` varchar(250) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `bitviajes`
+--
+
+INSERT INTO `bitviajes` (`ecodViaje`, `treferencia`, `tpedido`, `tDestino`, `tOrigen`, `ecodOperados`, `ecodCliente`, `EcodEstatus`, `fhSalida`, `fhLlegada`, `tmonitoreo`, `EcodCreacion`, `fhCreacion`, `ecodProvedor`, `tTipoViaje`, `tTipoGasto`, `Link`) VALUES
+(93, 'ADWdwad', 'dasDASdsa', '8', '8', '13cceb28-91c9-4005-b3df-d60978cd5d85', '27e7e827-aa07-44db-9164-c0a3afe928bd', 1, '2022-11-29', '2022-11-22', 0, '', NULL, 'gsegge', 'Intermedia', 'Estadias', 'fesfsef');
 
 -- --------------------------------------------------------
 
@@ -447,10 +453,10 @@ CREATE TABLE `bitviajes` (
 --
 
 CREATE TABLE `catcontroller` (
-  `ecodController` int NOT NULL,
+  `ecodController` int(16) NOT NULL,
   `tNombre` varchar(50) NOT NULL,
   `url` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `catcontroller`
@@ -472,14 +478,41 @@ INSERT INTO `catcontroller` (`ecodController`, `tNombre`, `url`) VALUES
 --
 
 CREATE TABLE `catdocumentos` (
-  `ecodDocumentos` int NOT NULL,
+  `ecodDocumentos` int(40) NOT NULL,
   `Documento` varchar(250) NOT NULL,
   `fhCreacion` datetime NOT NULL,
   `ecodCreacion` varchar(250) NOT NULL,
-  `ecodEstatus` int NOT NULL,
+  `ecodEstatus` int(16) NOT NULL,
   `ecodEliminacion` varchar(250) NOT NULL,
   `fhEliminacion` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `catempresas`
+--
+
+CREATE TABLE `catempresas` (
+  `ecodEmpresa` int(16) NOT NULL,
+  `tNombre` varchar(150) NOT NULL,
+  `tNombreCorto` varchar(50) DEFAULT NULL,
+  `tRfc` varchar(50) DEFAULT NULL,
+  `ecodMunicipio` int(16) DEFAULT NULL,
+  `ecodEstado` int(16) DEFAULT NULL,
+  `tCalle` varchar(150) DEFAULT NULL,
+  `nCalle` varchar(20) DEFAULT NULL,
+  `tClave` varchar(50) NOT NULL,
+  `tCp` varchar(20) NOT NULL,
+  `tRazonSocial` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `catempresas`
+--
+
+INSERT INTO `catempresas` (`ecodEmpresa`, `tNombre`, `tNombreCorto`, `tRfc`, `ecodMunicipio`, `ecodEstado`, `tCalle`, `nCalle`, `tClave`, `tCp`, `tRazonSocial`) VALUES
+(1, 'PRODUCTOS CÁRNICOS ESPECIALIZADOS, S.A. DE C.V\r\n\r\n	\r\n', 'PRODUCTOS CÁRNICOS ESPECIALIZADOS	 	', 'PAS050210LM7', 2, 1, 'Bosque de Duraznos 75 Piso 5\r\nCol. Bosque de las Lomas\r\n', '', 'TIF 501', '44470', 'Productos Alimenticios Super, S. de R.L. de C.V.');
 
 -- --------------------------------------------------------
 
@@ -488,7 +521,7 @@ CREATE TABLE `catdocumentos` (
 --
 
 CREATE TABLE `catestados` (
-  `ecodEstado` int NOT NULL,
+  `ecodEstado` int(11) NOT NULL,
   `tNombre` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -537,9 +570,9 @@ INSERT INTO `catestados` (`ecodEstado`, `tNombre`) VALUES
 --
 
 CREATE TABLE `catestatus` (
-  `EcodEstatus` int NOT NULL,
+  `EcodEstatus` int(16) NOT NULL,
   `tNombre` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `catestatus`
@@ -559,9 +592,9 @@ INSERT INTO `catestatus` (`EcodEstatus`, `tNombre`) VALUES
 --
 
 CREATE TABLE `catmenu` (
-  `ecodMenu` int NOT NULL,
+  `ecodMenu` int(16) NOT NULL,
   `tNombre` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `catmenu`
@@ -579,7 +612,7 @@ INSERT INTO `catmenu` (`ecodMenu`, `tNombre`) VALUES
 --
 
 CREATE TABLE `catmunicipios` (
-  `ecodMunicipio` int NOT NULL,
+  `ecodMunicipio` int(11) NOT NULL,
   `tNombre` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -592,7 +625,7 @@ INSERT INTO `catmunicipios` (`ecodMunicipio`, `tNombre`) VALUES
 (2, 'San Francisco de los Romo'),
 (3, 'El Llano'),
 (4, 'Rincón de Romos'),
-(5, 'Cosio'),
+(5, 'Cosío'),
 (6, 'San José de Gracia'),
 (7, 'Tepezalá'),
 (8, 'Pabellón de Arteaga'),
@@ -3054,10 +3087,10 @@ INSERT INTO `catmunicipios` (`ecodMunicipio`, `tNombre`) VALUES
 --
 
 CREATE TABLE `catpermisos` (
-  `ecodPermisos` int NOT NULL,
+  `ecodPermisos` int(16) NOT NULL,
   `tNombre` varchar(50) NOT NULL,
   `tNombreCorto` varchar(16) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `catpermisos`
@@ -3075,10 +3108,10 @@ INSERT INTO `catpermisos` (`ecodPermisos`, `tNombre`, `tNombreCorto`) VALUES
 --
 
 CREATE TABLE `catsubmenu` (
-  `ecodSubMenu` int NOT NULL,
+  `ecodSubMenu` int(16) NOT NULL,
   `tNombre` varchar(50) NOT NULL,
   `url` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `catsubmenu`
@@ -3101,12 +3134,12 @@ INSERT INTO `catsubmenu` (`ecodSubMenu`, `tNombre`, `url`) VALUES
 --
 
 CREATE TABLE `cattiff` (
-  `ecodTif` int NOT NULL,
+  `ecodTif` int(50) NOT NULL,
   `tNombre` varchar(100) NOT NULL,
   `tNombreCorto` varchar(50) DEFAULT NULL,
-  `ecodCiudad` int DEFAULT NULL,
-  `ecodEstado` int DEFAULT NULL,
-  `tDireccion` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `ecodCiudad` int(50) DEFAULT NULL,
+  `ecodEstado` int(50) DEFAULT NULL,
+  `tDireccion` varchar(200) DEFAULT NULL,
   `tcp` varchar(30) DEFAULT NULL,
   `tTif` varchar(30) DEFAULT NULL,
   `fhCreacion` datetime NOT NULL,
@@ -3117,54 +3150,17 @@ CREATE TABLE `cattiff` (
   `ecodEliminacion` varchar(250) DEFAULT NULL,
   `fhEliminacion` datetime DEFAULT NULL,
   `tMotivo` varchar(250) DEFAULT NULL,
-  `ecodEstatus` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `ecodEstatus` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `cattiff`
 --
 
 INSERT INTO `cattiff` (`ecodTif`, `tNombre`, `tNombreCorto`, `ecodCiudad`, `ecodEstado`, `tDireccion`, `tcp`, `tTif`, `fhCreacion`, `ecodCreacion`, `tRFC`, `ecodEdicion`, `fhEdicion`, `ecodEliminacion`, `fhEliminacion`, `tMotivo`, `ecodEstatus`) VALUES
-(62, 'EMPACADORA DE CARNES UNIDAD GANADERA, S. A. DE C. V.', NULL, 1, 1, 'AVENIDA UNIVERSIDAD No. 602-1, COLONIA UNIDAD GANADERA, PARTADO POSTAL No. 570', '20130', '45', '2022-12-01 16:42:28', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(63, 'FRIALSA FRIGORÍFICOS, S. A. DE C. V', NULL, 2, 1, 'CIRCUITO AGUASCALIENTES NORTE No. 160, PARQUE INDUSTRIAL  DEL VALLE DE AGUASCALIENTES', '20355', '214', '2022-12-01 16:44:22', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(64, 'GUTSA REFRIGERACIÓN, S. A. DE C. V', NULL, 1, 1, 'ESÚS MA. ROMO No. 107, CUIDAD INDUSTRIAL', '20130', '306', '2022-12-01 16:46:27', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(65, 'FRIGORIZADOS LA HUERTA, S. A. DE C. V', NULL, 2, 1, 'CALLE 1 No. 140, COL. MEDIO KILO', '20350', '360', '2022-12-01 16:49:42', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(66, 'EMPACADORA DILUSA DE AGUASCALIENTES, S. A. DE C. V', NULL, 1, 1, 'JESÚS MARÍA ROMO No. 138, CIUDAD INDUSTRIAL,', '20290', '564', '2022-12-01 16:51:04', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(67, 'PRODIAVES, S. A. DE C. V.', NULL, 1, 1, 'CAMINO AL RELICARIO S/N, FRACCIONAMIENTO LOS COBOS,  DELEGACIÓN CALVILLITO', '20344', '592', '2022-12-01 16:51:54', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(68, 'INTERPEC SAN MARCOS, S. A. DE C. V.', NULL, 1, 1, 'CARRETERA PANAMERICANA SUR Km. 519, COL. LOS ARELLANOS,', '20340', '663', '2022-12-01 16:52:37', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(69, '671', NULL, 1, 1, 'CIRCUITO AGUASCALIENTES SUR No. 106, PARQUE INDUSTRIAL DEL  VALLE DE AGUASCALIENTES', '20355', '671', '2022-12-01 16:54:52', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(70, 'HERMES HONEY, S. A. DE C. V', NULL, 3, 1, 'CARRETERA A SAN LUIS POTOSÍ Km. 20, INTERIOR B, COL. LA  TINAJA', '20337', '689', '2022-12-01 16:55:50', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(71, 'EMPACADORA DE CARNES SAN FRANCISCO, S. A. DE C. V.', NULL, 604, 1, 'CARRETERA PANAMERICANA NORTE Km. 14.3, J. GÓMEZ  PORTUGAL', '20909', '744', '2022-12-01 16:58:41', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(72, 'AMARO ALIMENTOS, S. A. DE C. V', NULL, 604, 1, 'CERRADA MECÁNICOS NO. 100 INTERIOR 9, PARQUE INDUSTRIAL  CHICHIMECO', '20916', '745', '2022-12-01 16:59:45', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(73, '750', NULL, 2, 1, 'Km 0 + 500, CARRETERA AGUASCALIENTES - CHICALOTE', '20356', '750', '2022-12-01 17:00:37', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(74, 'SOLUCIONES FRIGORÍFICAS DE AGUASCALIENTES, S.A. DE C.V.', NULL, 2, 1, 'CARRETERA PANAMERICANA AGUASCALIENTES, RINCÓN DE LOS  ROMOS, Km. 19, GRANJAS COYONOXTLE', '20300', '761', '2022-12-01 17:01:38', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(75, '22430', NULL, 14, 2, 'ALEJANDRO VON HUMBOLT No. 17538, FRACCIONAMIENTO DE  GARITA DE OTAY', '22430', '95', '2022-12-01 17:02:50', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(76, 'SUKARNE PRODUCCIÓN, S. A. DE C. V.', NULL, 12, 2, 'CARRETERA FEDERAL No. 2, MEXICALI-TIJUANA Km. 13.5, COL.  PROGRESO', '21326', '120', '2022-12-01 17:05:04', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(77, 'PROCESADORA Y EMPACADORA DE CARNES DEL NORTE, S. A. DE  C. V.', NULL, 12, 2, 'KM 13.5 CARRETERA A SAN FELIPE CUATRO DIVISIÓN II CERRO  PRIETO', '21700', '301', '2022-12-01 17:19:37', 'Administrador1', NULL, 'Administrador1', '2022-12-01 17:29:44', NULL, NULL, NULL, 1),
-(78, 'EMPACADORA DE TIJUANA, S. A. DE C. V', NULL, 14, 2, 'CALLE RÍO SUCHIATE No. 9650, COL. MARRÓN', '22015', '421', '2022-12-01 17:38:28', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(79, 'MEXTEARINAS, S. A. DE C. V.', NULL, 12, 2, 'Km. 5.5 CARRETERA A SAN LUIS RÍO COLORADO', '21360', '456', '2022-12-01 17:41:05', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(80, 'INDUSTRIAS DE REFRIGERACIÓN PLAFER, S. A. DE C. V.', NULL, 734, 15, 'CALLE PIRULES MANZANA 3, LOTE 9, COMPLEJO INDUSTRIAL  CUAMANTLA', '54730', '509', '2022-12-01 17:42:39', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(81, 'LOGÍSTICA ALIMENTICIA ALCANTAR, S. A. DE C. V.', NULL, 272, 15, 'CAMINO DE LA AMISTAD No. 118. COL. CAMPESTRE ARAGÓN', '07530', '653', '2022-12-01 17:44:53', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(82, 'ALIMENTOS CALIDAD ÓPTIMA, S. A. DE C. V.', NULL, 958, 19, 'CARRETERA MÉXICO-LAREDO KM 1012', '65500', '536', '2022-12-01 17:47:01', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(83, 'CONGELADORA FREZZ LOGISTICS, S. A. DE C. V.', NULL, 968, 19, 'CALLE LATERAL AUTOPISTA SALTILLO-LAREDO No. 6710', '66085', '582', '2022-12-01 17:49:24', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(84, 'PROFRÍO LOGÍSTICA, S. A. DE C. V', NULL, 948, 19, 'AV. DEL ESTADO NO. 1419, COL. BUENOS AIRES,', '64800', '566', '2022-12-01 17:50:38', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(85, 'CONGELADORA Y CONSERVADORES DEL PACIFICO S. A. DE C. V.', NULL, 1872, 25, 'CARRETERA A NAVOLATO No. 1067 PONIENTE ACERCA NORTE,  COL. BACHIGUALATO', '80140', '486', '2022-12-01 17:52:39', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(86, 'BASAL MONTERREY, S. A. DE C. V.', NULL, 973, 19, 'AV. INTERNACIONAL 301, PARQUE INDUSTRIAL HUINALA,', '66645', '325', '2022-12-01 17:54:20', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(87, 'INDUSTRIALIZADORA DE CÁRNICOS STRATTEGA, S. A DE C. V.', NULL, 818, 16, 'Km. 99 CARRETERA NACIONAL 110 S/N,', '59400', '126', '2022-12-01 17:55:38', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(88, 'INDUSTRIALIZADORA DE CÁRNICOS STRATTEGA, S. A. DE C. V.', NULL, 199, 8, 'Km. 7.5 CARRETERA A CIUDAD CUAUHTÉMOC S/N, COL. LA ÁNIMAS', '31450', '90', '2022-12-01 17:58:27', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(89, 'FRIALSA FRIGORÍFICOS S. A. DE C. V.', NULL, 971, 19, 'ESTACIÓN LAGRANGE No. 201,', '66440', '339', '2022-12-01 18:00:12', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(90, '390', NULL, 302, 10, 'CARRETERA GÓMEZ PALACIO-CHIHUAHUA Km. 13.5, COL. EJIDO  COMPETENCIA', '35135', '390', '2022-12-01 18:01:56', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(91, 'ALMACENES REFRIGERADOS CONSOLIDADOS, S.A. DE C.V.', NULL, 731, 15, 'CALLE SIN NOMBRE No. 13, COLONIA PASEO DE LOS VIRREYES', '54608', '660', '2022-12-01 18:03:12', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(92, 'PRODUCTOS CHATA, S. A. DE C. V.', NULL, 1872, 25, 'CAMINO REAL NO. 5, COL. BACHIGUALATO', '80140', '89', '2022-12-01 18:05:53', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(93, 'QUALTIA ALIMENTOS OPERACIONES, S. DE R. L. DE C. V.', NULL, 731, 15, 'AVENIDA INDUSTRIA NO. 23, FRACCIONAMIENTO INDUSTRIAL EL  TREBOL', '54600', '85', '2022-12-01 18:08:22', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(94, 'FRIALSA FRIGORÍFICOS, S. A. DE C. V.', NULL, 327, 11, 'CARR. IRAPUATO-ABASOLO Km. 5.3,', '36568', '251', '2022-12-01 18:09:42', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(95, 'EMBUTIDOS CORONA, S. A. DE C. V', NULL, 533, 14, 'LUIS ENRIQUE WILLIAMS NO. 865, COL. PARQUE INDUSTRIAL  BELENES NORTE', '45150', '153', '2022-12-01 18:10:41', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(96, 'ALMACENES Y FRIGORÍFICOS LA PROVIDENCIA, S. A. DE C. V.', NULL, 986, 19, 'AV. EMPRENDEDORES No. 600, CARRETERA ALLENDE-CADEREYTA,  EL CERRITO', '67350', '690', '2022-12-01 18:12:20', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(97, 'ECOFRÍO, S. A. P. I. DE C. V.', NULL, 736, 15, 'CARRETERA PUENTE GRANDE-LAS ÁNIMAS S/N, BODEGA 1-A, COL.  SAN JOSÉ PUENTE GRANDE', '54834', '665', '2022-12-01 18:14:37', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(98, 'OMEX ALIMENTARIA, S. A. DE C. V', NULL, 603, 14, 'Km. 3.5 CARR. AYOTLÁN-LA PIEDAD', '47930', '327', '2022-12-01 18:15:58', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(99, 'INDUSTRIAS DE REFRIGERACIÓN PLAFER, S. A. DE C. V.', NULL, 736, 15, 'AV. DESARROLLO No. 11, PARQUE INDUSTRIAL,', '54730', '638', '2022-12-01 18:17:37', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(100, 'FRIALSA FRIGORÍFICOS, S. A DE C. V.', NULL, 973, 19, 'CARRETERA LIBRAMIENTO NORESTE No. 981 INTERIOR B, EX HACIENDA SANTA ROSA', '66610', '595', '2022-12-01 18:20:31', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(101, 'SALCHICHAS Y JAMONES DE MÉXICO, S. A. DE C. V.', NULL, 734, 15, 'GUILLERMO GONZÁLEZ CAMARENA NO. 28, PARQUE INDUSTRIAL  CUAMATLA', '54730', '197', '2022-12-01 18:22:10', 'Administrador1', NULL, NULL, NULL, NULL, NULL, NULL, 1);
+(11, 'ddd', 'www', 2457, 32, 'gsegesges3', 'tty54', 'dw', '2022-12-01 16:30:37', 'Administrador1', 'rrr', NULL, NULL, NULL, NULL, NULL, 1),
+(12, 'wadawd', 'dawdd', 2457, 32, 'dwadawdwad', 'wad', 'aw', '2022-12-01 17:12:04', 'Administrador1', 'adwadd', NULL, NULL, NULL, NULL, NULL, 1),
+(13, 'asw', 'aw', 2457, 32, 'aw', 'aaw', 'asw', '2022-12-01 17:25:14', 'Administrador1', 'asw', 'Administrador1', '2022-12-01 17:28:22', NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -3173,9 +3169,9 @@ INSERT INTO `cattiff` (`ecodTif`, `tNombre`, `tNombreCorto`, `ecodCiudad`, `ecod
 --
 
 CREATE TABLE `cattipousuario` (
-  `ecotTipoUsuario` int NOT NULL,
+  `ecotTipoUsuario` int(16) NOT NULL,
   `tNombre` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `cattipousuario`
@@ -3196,19 +3192,19 @@ INSERT INTO `cattipousuario` (`ecotTipoUsuario`, `tNombre`) VALUES
 
 CREATE TABLE `catusuarios` (
   `ecodUsuarios` varchar(250) NOT NULL,
-  `trfc` varchar(50) NOT NULL,
+  `trfc` varchar(50) DEFAULT NULL,
   `tNombre` varchar(80) NOT NULL,
   `tApellido` varchar(80) DEFAULT NULL,
   `fCreacion` date NOT NULL,
-  `EcodEstatus` int NOT NULL,
-  `ecodTipoUsuario` int DEFAULT NULL,
+  `EcodEstatus` int(11) NOT NULL,
+  `ecodTipoUsuario` int(16) DEFAULT NULL,
   `ecodEliminacion` varchar(250) DEFAULT NULL,
   `fhEliminacion` datetime DEFAULT NULL,
   `tMotivoEliminacion` varchar(250) DEFAULT NULL,
   `ecodCreacion` varchar(250) DEFAULT NULL,
   `ecoEdicion` varchar(250) DEFAULT NULL,
   `fhEdicion` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `catusuarios`
@@ -3219,6 +3215,7 @@ INSERT INTO `catusuarios` (`ecodUsuarios`, `trfc`, `tNombre`, `tApellido`, `fCre
 ('1c5bf5bb-7dd9-45dc-b009-2c77e8638012', 'VEMC0001112PR', 'PR', 'PR', '2022-11-15', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('25bc9de2-0043-4bda-ab9e-24beb36b0914', 'VEMC0001112CA', 'sin', 'sin', '2022-11-02', 1, NULL, NULL, NULL, NULL, NULL, 'Administrador1', '2022-11-02 12:33:16'),
 ('27e7e827-aa07-44db-9164-c0a3afe928bd', 'VEMC0001112CS', 'cliente', 'cliente', '2022-11-02', 1, 2, NULL, NULL, NULL, NULL, 'Administrador1', '2022-11-02 12:06:54'),
+('714ad121-9155-4f13-9280-f796ca611978', NULL, 'dawdw', NULL, '2022-12-01', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('Administrador1', 'VEMC0001112CA', 'Carlos Fernando', 'Ventura Marin', '2022-11-02', 1, 5, NULL, NULL, NULL, NULL, 'Administrador1', '2022-11-04 17:49:42');
 
 -- --------------------------------------------------------
@@ -3228,10 +3225,10 @@ INSERT INTO `catusuarios` (`ecodUsuarios`, `trfc`, `tNombre`, `tApellido`, `fCre
 --
 
 CREATE TABLE `relestadosmunicipios` (
-  `ecodestadosmunicipios` int NOT NULL,
-  `ecodestados` int NOT NULL,
-  `ecodmunicipios` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `ecodestadosmunicipios` int(11) NOT NULL,
+  `ecodestados` int(11) NOT NULL,
+  `ecodmunicipios` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `relestadosmunicipios`
@@ -5703,11 +5700,11 @@ INSERT INTO `relestadosmunicipios` (`ecodestadosmunicipios`, `ecodestados`, `eco
 --
 
 CREATE TABLE `relmenusubmenu` (
-  `ecosMenuSubmenu` int NOT NULL,
-  `ecodSubmenu` int NOT NULL,
-  `ecodMenu` int NOT NULL,
-  `ecodController` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `ecosMenuSubmenu` int(16) NOT NULL,
+  `ecodSubmenu` int(16) NOT NULL,
+  `ecodMenu` int(11) NOT NULL,
+  `ecodController` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `relmenusubmenu`
@@ -5727,10 +5724,10 @@ INSERT INTO `relmenusubmenu` (`ecosMenuSubmenu`, `ecodSubmenu`, `ecodMenu`, `eco
 --
 
 CREATE TABLE `relusuariocelular` (
-  `ecodUsuarioCelular` int NOT NULL,
+  `ecodUsuarioCelular` int(16) NOT NULL,
   `ecodUsuario` varchar(250) NOT NULL,
-  `ecodCelular` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `ecodCelular` int(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `relusuariocelular`
@@ -5746,10 +5743,10 @@ INSERT INTO `relusuariocelular` (`ecodUsuarioCelular`, `ecodUsuario`, `ecodCelul
 --
 
 CREATE TABLE `relusuariocorreo` (
-  `ecodUsuarioCorreo` int NOT NULL,
+  `ecodUsuarioCorreo` int(16) NOT NULL,
   `ecodUsuario` varchar(250) NOT NULL,
-  `ecodCorreo` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `ecodCorreo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `relusuariocorreo`
@@ -5769,13 +5766,13 @@ INSERT INTO `relusuariocorreo` (`ecodUsuarioCorreo`, `ecodUsuario`, `ecodCorreo`
 --
 
 CREATE TABLE `relusuariosubmenu` (
-  `ecodrelusuarioSubMenu` int NOT NULL,
+  `ecodrelusuarioSubMenu` int(16) NOT NULL,
   `ecodUsuario` varchar(250) NOT NULL,
-  `ecodSubMenu` int NOT NULL,
-  `ecodMenu` int NOT NULL,
-  `ecodPermisos` int NOT NULL,
-  `ecodController` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `ecodSubMenu` int(16) NOT NULL,
+  `ecodMenu` int(16) NOT NULL,
+  `ecodPermisos` int(16) NOT NULL,
+  `ecodController` int(16) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `relusuariosubmenu`
@@ -5802,11 +5799,11 @@ INSERT INTO `relusuariosubmenu` (`ecodrelusuarioSubMenu`, `ecodUsuario`, `ecodSu
 --
 
 CREATE TABLE `relviajedocumentos` (
-  `ecodrelViajeDocumentos` int NOT NULL,
-  `ecodViaje` int NOT NULL,
-  `ecodDocumento` int NOT NULL,
+  `ecodrelViajeDocumentos` int(16) NOT NULL,
+  `ecodViaje` int(16) NOT NULL,
+  `ecodDocumento` int(30) NOT NULL,
   `tipoDocumento` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -5815,10 +5812,10 @@ CREATE TABLE `relviajedocumentos` (
 --
 
 CREATE TABLE `relviajemensaje` (
-  `ecodviajeMensaje` int NOT NULL,
-  `ecodViaje` int NOT NULL,
-  `ecodMensaje` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `ecodviajeMensaje` int(16) NOT NULL,
+  `ecodViaje` int(16) NOT NULL,
+  `ecodMensaje` int(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Índices para tablas volcadas
@@ -5872,6 +5869,12 @@ ALTER TABLE `catcontroller`
 --
 ALTER TABLE `catdocumentos`
   ADD PRIMARY KEY (`ecodDocumentos`);
+
+--
+-- Indices de la tabla `catempresas`
+--
+ALTER TABLE `catempresas`
+  ADD PRIMARY KEY (`ecodEmpresa`);
 
 --
 -- Indices de la tabla `catestados`
@@ -6001,127 +6004,133 @@ ALTER TABLE `relviajemensaje`
 -- AUTO_INCREMENT de la tabla `bitcelular`
 --
 ALTER TABLE `bitcelular`
-  MODIFY `ecodCelular` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `ecodCelular` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `bitcorreos`
 --
 ALTER TABLE `bitcorreos`
-  MODIFY `ecodCorreo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `ecodCorreo` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT de la tabla `bitinciadencias`
 --
 ALTER TABLE `bitinciadencias`
-  MODIFY `ecodIncidencia` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `ecodIncidencia` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `bitmensaje`
 --
 ALTER TABLE `bitmensaje`
-  MODIFY `ecodMensaje` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=471;
+  MODIFY `ecodMensaje` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=471;
 
 --
 -- AUTO_INCREMENT de la tabla `bitviajes`
 --
 ALTER TABLE `bitviajes`
-  MODIFY `ecodViaje` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `ecodViaje` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT de la tabla `catcontroller`
 --
 ALTER TABLE `catcontroller`
-  MODIFY `ecodController` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ecodController` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `catdocumentos`
 --
 ALTER TABLE `catdocumentos`
-  MODIFY `ecodDocumentos` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ecodDocumentos` int(40) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `catempresas`
+--
+ALTER TABLE `catempresas`
+  MODIFY `ecodEmpresa` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `catestados`
 --
 ALTER TABLE `catestados`
-  MODIFY `ecodEstado` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `ecodEstado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `catestatus`
 --
 ALTER TABLE `catestatus`
-  MODIFY `EcodEstatus` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `EcodEstatus` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `catmenu`
 --
 ALTER TABLE `catmenu`
-  MODIFY `ecodMenu` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ecodMenu` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `catmunicipios`
 --
 ALTER TABLE `catmunicipios`
-  MODIFY `ecodMunicipio` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2458;
+  MODIFY `ecodMunicipio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2458;
 
 --
 -- AUTO_INCREMENT de la tabla `catpermisos`
 --
 ALTER TABLE `catpermisos`
-  MODIFY `ecodPermisos` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ecodPermisos` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `catsubmenu`
 --
 ALTER TABLE `catsubmenu`
-  MODIFY `ecodSubMenu` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ecodSubMenu` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `cattiff`
 --
 ALTER TABLE `cattiff`
-  MODIFY `ecodTif` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `ecodTif` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `cattipousuario`
 --
 ALTER TABLE `cattipousuario`
-  MODIFY `ecotTipoUsuario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ecotTipoUsuario` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `relmenusubmenu`
 --
 ALTER TABLE `relmenusubmenu`
-  MODIFY `ecosMenuSubmenu` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ecosMenuSubmenu` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `relusuariocelular`
 --
 ALTER TABLE `relusuariocelular`
-  MODIFY `ecodUsuarioCelular` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `ecodUsuarioCelular` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `relusuariocorreo`
 --
 ALTER TABLE `relusuariocorreo`
-  MODIFY `ecodUsuarioCorreo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `ecodUsuarioCorreo` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT de la tabla `relusuariosubmenu`
 --
 ALTER TABLE `relusuariosubmenu`
-  MODIFY `ecodrelusuarioSubMenu` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `ecodrelusuarioSubMenu` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT de la tabla `relviajedocumentos`
 --
 ALTER TABLE `relviajedocumentos`
-  MODIFY `ecodrelViajeDocumentos` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ecodrelViajeDocumentos` int(16) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `relviajemensaje`
 --
 ALTER TABLE `relviajemensaje`
-  MODIFY `ecodviajeMensaje` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=415;
+  MODIFY `ecodviajeMensaje` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=415;
 
 --
 -- Restricciones para tablas volcadas
