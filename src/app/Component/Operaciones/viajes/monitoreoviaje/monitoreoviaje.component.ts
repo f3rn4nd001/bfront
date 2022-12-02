@@ -127,7 +127,11 @@ export class MonitoreoviajeComponent implements OnInit {
               'ecodViaje': new FormControl(icarcore.ecodViaje),
               'ecodCliente': new FormControl(icarcore.ecodCliente),
               'ecodProvedor': new FormControl(icarcore.ecodProvedor),
-              
+              'emDestino': new FormControl(icarcore.emDestino),
+              'Link': new FormControl(icarcore.Link),
+              'municipio': new FormControl(icarcore.municipio),
+              'estados': new FormControl(icarcore.estados),
+            
             }));
           }
         });   
@@ -176,7 +180,9 @@ export class MonitoreoviajeComponent implements OnInit {
           fhSalida:element.fhSalida,
           fhLlegada:element.fhLlegada,
           ecodProvedor:element.ecodProvedor,
-          
+          emDestino:element.emDestino,
+          estados:element.estados,
+          municipio:element.municipio
         })
       });
     }
