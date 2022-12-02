@@ -30,9 +30,9 @@
             <div class="col-md-2">{{dtas!.ecodProvedor}}</div> 
             <span layout="row" *ngIf="dtas.fhSalida!=null && dtas.fhLlegada!=null"><hr flex/></span>
           
-            <div class="col-md-2"><strong>Origen</strong></div>
+            <div class="col-md-2"><strong>Tif origen</strong></div>
             <div class="col-md-2">{{dtas!.tTif}}</div>
-            <div class="col-md-2"><strong>Destino</strong></div>
+            <div class="col-md-2"><strong>Tif destino</strong></div>
             <div class="col-md-2">{{dtas!.tiffdestino}}</div>
           </div>
           <span layout="row" *ngIf="dtas.fhSalida!=null && dtas.fhLlegada!=null"><hr flex/></span>
@@ -43,24 +43,29 @@
             <div class="col-md-2" *ngIf="dtas.fhLlegada!=null">{{dtas!.fhLlegada}}</div>
           </div>
           <span layout="row" *ngIf="dtas.fhSalida!=null && dtas.fhLlegada!=null"><hr flex/></span>
-          <h5 class="text-primary text-center"><strong>Info Tiff</strong></h5>
-          <span layout="row"><hr flex/></span>
+          <h5 class="text-primary text-center"><strong>Info Tif</strong></h5>
+          <span layout="row"></span>
           
-          <div class="row"> 
-            <div class="col-md-1"  ><strong>Origen</strong></div>
-            <div class="col-md-3" >{{dtas!.nombreEmpresa}}</div> 
-            <div class="col-md-2" ><strong>Municipio origen</strong></div>
-            <div class="col-md-2" >{{dtas!.Municipio}}</div>
-            <div class="col-md-2" ><strong>Estado origen</strong></div>
-            <div class="col-md-2" >{{dtas!.Estado}}</div>
-            <span layout="row" ><hr flex/></span>
-          
-            <div class="col-md-2"><strong>Destino</strong></div>
-            <div class="col-md-2">{{dtas!.nombreempresades}}</div>
-            <div class="col-md-2"><strong>Municipio Destino</strong></div>
-            <div class="col-md-2">{{dtas!.municipiodes}}</div>
-            <div class="col-md-2" ><strong>Estado Destino</strong></div>
-            <div class="col-md-2" >{{dtas!.estadodes}}</div>
+          <div class="row col-12"> 
+            <div class="col-md-6 row"  ><strong>Origen</strong>
+            <br>
+            <div class="col-md-12" >Nombre: {{dtas!.nombreEmpresa}}</div> 
+            <div class="col-md-12" >Direccion{{dtas!.tDireccionor}}</div>
+            <div class="col-md-6" >{{dtas!.Municipio}}</div>
+            <div class="col-md-6" >{{dtas!.Estado}}</div>
+            <div class="col-md-4" >C.P. :{{dtas!.tcpor}}</div>
+            
+            </div>
+           
+            <div class="col-md-6 row"  ><strong>Destino</strong>
+              <br>
+              <div class="col-md-11" >Nombre: {{dtas!.nombreempresades}}</div> 
+              <div class="col-md-12" >Direccion{{dtas!.tDirecciondes}}</div>
+              <div class="col-md-6" >{{dtas!.municipiodes}}</div>
+              <div class="col-md-6" >{{dtas!.estadodes}}</div>
+              <div class="col-md-4" >C.P. :{{dtas!.tcpdes}}</div>
+              
+              </div>
           </div>
 
           <span layout="row" *ngIf="mensjerisqls.length>0"><hr flex/></span>
@@ -226,9 +231,9 @@
               <div class="col-md-2">{{dtas!.ecodProvedor}}</div> 
               <span layout="row" *ngIf="dtas.fhSalida!=null && dtas.fhLlegada!=null"><hr flex/></span>
             
-              <div class="col-md-2"><strong>Origen</strong></div>
+              <div class="col-md-2"><strong>Tif origen</strong></div>
               <div class="col-md-2">{{dtas!.tTif}}</div>
-              <div class="col-md-2"><strong>Destino</strong></div>
+              <div class="col-md-2"><strong>Tif destino</strong></div>
               <div class="col-md-2">{{dtas!.tiffdestino}}</div>
             </div>
             <span layout="row" *ngIf="dtas.fhSalida!=null && dtas.fhLlegada!=null"><hr flex/></span>
@@ -239,23 +244,30 @@
               <div class="col-md-2" *ngIf="dtas.fhLlegada!=null">{{dtas!.fhLlegada}}</div>
             </div>
             <span layout="row" *ngIf="dtas.fhSalida!=null && dtas.fhLlegada!=null"><hr flex/></span>
-            <h5 class="text-primary text-center"><strong>Info Tiff</strong></h5>
-            <div class="row"> 
-              <div class="col-md-1"  ><strong>Origen</strong></div>
-              <div class="col-md-3" >{{dtas!.nombreEmpresa}}</div> 
-              <div class="col-md-2" ><strong>Municipio origen</strong></div>
-              <div class="col-md-2" >{{dtas!.Municipio}}</div>
-              <div class="col-md-2" ><strong>Estado origen</strong></div>
-              <div class="col-md-2" >{{dtas!.Estado}}</div>
+            <h5 class="text-primary text-center"><strong>Info Tif</strong></h5>
+            <span layout="row"></span>
+          
+            <div class="row col-12"> 
+              <div class="col-md-6 row"  ><strong>Origen</strong>
+              <br>
+              <div class="col-md-12" >Nombre: {{dtas!.nombreEmpresa}}</div> 
+              <div class="col-md-12" >Direccion{{dtas!.tDireccionor}}</div>
+              <div class="col-md-6" >{{dtas!.Municipio}}</div>
+              <div class="col-md-6" >{{dtas!.Estado}}</div>
+              <div class="col-md-4" >C.P. :{{dtas!.tcpor}}</div>
+              
+              </div>
               <span layout="row" ><hr flex/></span>
           
-            <div class="col-md-2"><strong>Destino</strong></div>
-            <div class="col-md-2">{{dtas!.nombreempresades}}</div>
-            <div class="col-md-2"><strong>Municipio Destino</strong></div>
-            <div class="col-md-2">{{dtas!.municipiodes}}</div>
-            <div class="col-md-2" ><strong>Estado Destino</strong></div>
-            <div class="col-md-2" >{{dtas!.estadodes}}</div>
-        
+              <div class="col-md-6 row"  ><strong>Destino</strong>
+                <br>
+                <div class="col-md-11" >Nombre: {{dtas!.nombreempresades}}</div> 
+                <div class="col-md-12" >Direccion{{dtas!.tDirecciondes}}</div>
+                <div class="col-md-6" >{{dtas!.municipiodes}}</div>
+                <div class="col-md-6" >{{dtas!.estadodes}}</div>
+                <div class="col-md-4" >C.P. :{{dtas!.tcpdes}}</div>
+                
+                </div>
             </div>
             <span layout="row" *ngIf="mensjerisqls.length>0"><hr flex/></span>
             <h5 class="text-primary text-center"  *ngIf="mensjerisqls.length>0"><strong>Mensajes</strong></h5>
